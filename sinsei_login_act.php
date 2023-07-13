@@ -39,8 +39,20 @@ if ($user['is_admin'] === 1) {
   $_SESSION['is_admin'] = true;
   header("Location: sinsei_read.php");
   exit();
-} else {
+}else if($user['is_admin'] === 1){
+  $_SESSION['is_admin'] = true;
+  $_SESSION = array();
+  $_SESSION['session_id'] = session_id();
+  $_SESSION['is_admin'] = $user['is_admin'];
+  $_SESSION['name'] = $user['name'];
+  header("Location:sinsei_read.php");
+  exit();
+}else {
   $_SESSION['is_admin'] = false;
-  header("Location: sinsei_u_read.php");
+  $_SESSION = array();
+  $_SESSION['session_id'] = session_id();
+  $_SESSION['is_admin'] = $user['is_admin'];
+  $_SESSION['name'] = $user['name'];
+  header("Location:sinsei_u_read.php");
   exit();
 }
